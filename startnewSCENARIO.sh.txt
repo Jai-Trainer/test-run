@@ -5,7 +5,6 @@
 #oc adm taint node master03 node=worker:NoSchedule
 oc apply -f oauth.yaml
 oc delete groups --all
-oc label node master01 trek=star --overwrite=true
 echo "-----------------Creating Bluewills Project and Resources------------"
 oc new-project bluewills
 oc new-app --name=rocky demo/openshift-image
