@@ -10,7 +10,7 @@ oc label node master01 trek=star --overwrite=true
 
 echo "-----------------06 Creating Gru Project and Resources------------"
 oc new-project gru
-oc new-app --name=scala demo/openshift-image  
+oc new-app --name=minion -i httpd 
 sleep 5
 
 echo "-----------------07 Creating Lerna Project and Resources------------"
@@ -20,20 +20,21 @@ sleep 5
 
 echo "-----------------08 Creating Bluewills area51 and Resources------------"
 oc new-project area51
-oc new-app --name=oxcart demo/openshift-image
+oc new-app --name=oxcart --image=quay.io/redhattraining/hello-world-nginx 
 oc expose svc oxcart --hostname=oxcart.apps.ocp4.example.com
 oc delete route oxcart
 sleep 5
 
 echo "-----------------12 Creating math Project and Resources------------"
 oc new-project math
-oc new-app --name=qed demo/openshift-image
+oc new-app --name=qed -i httpd
 oc expose svc qed --hostname=qed.apps.ocp4.example.com
 sleep 5'
 
 echo "-----------------13/14Creating Apples Project and Resources------------"
 oc new-project apples
 oc create sa ex280sa
+
 oc new-app --name oranges demo/crashimage
 sleep 3
 oc delete svc oranges
